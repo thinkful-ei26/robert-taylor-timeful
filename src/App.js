@@ -3,14 +3,14 @@ import Timer from './timer';
 import Start from './buttons/start'; 
 import Stop from './buttons/stop'; 
 import Reset from './buttons/reset'; 
-import './App.css';
+import './App.scss';
 
 export default class App extends React.Component {
     constructor(props){
       super(props); 
       this.state ={
-        seconds: 55,
-        minutes: 59, 
+        seconds: 0,
+        minutes: 0, 
         hours:0,
         active: false, 
         interval: null
@@ -93,7 +93,7 @@ export default class App extends React.Component {
     render(){
 
       return (
-        <div className ='parent'>
+        <div id="workarea">
           <h1>Timer</h1>
           <Timer seconds={this.addLeadingZeros(this.state.seconds)}
             minutes={this.addLeadingZeros(this.state.minutes)} 
@@ -101,8 +101,6 @@ export default class App extends React.Component {
           <Start handleStartButton={this.handleStartButton} />
           <Stop handleStopButton={this.handleStopButton}/>
           <Reset handleResetButton={this.handleResetButton}/>
-          
-          
         </div>
       )
     }
