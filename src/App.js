@@ -22,11 +22,13 @@ export default class App extends React.Component {
       this.toggle = this.toggle.bind(this); 
       this.minutesChange = this.minutesChange.bind(this); 
       this.hoursChange = this.hoursChange.bind(this); 
+      this.addLeadingZeros = this.addLeadingZeros.bind(this); 
     }
     timer(){
       console.log(typeof this.state.seconds);
       this.minutesChange();
-      this.hoursChange(); 
+      this.hoursChange();
+
       if(this.state.active){
       this.setState({seconds: this.state.seconds +1})
       }
@@ -47,6 +49,14 @@ export default class App extends React.Component {
     toggle(){
      this.state.active = !this.state.active;
     }
+    addLeadingZeros(value) {
+      value = String(value);
+      while (value.length < 2) {
+        value = '0' + value;
+      }
+      return value;
+    }
+    
     handleStartButton(e){
       console.log('start button pressed!')
       e.preventDefault();
@@ -81,10 +91,13 @@ export default class App extends React.Component {
     }
 
     render(){
+
       return (
         <div className ='parent'>
           <h1>Timer</h1>
-          <Timer seconds={this.state.seconds} minutes={this.state.minutes} hours={this.state.hours} />
+          <Timer seconds={this.addLeadingZeros(this.state.seconds)}
+            minutes={this.addLeadingZeros(this.state.minutes)} 
+            hours={this.addLeadingZeros(this.state.hours)} />
           <Start handleStartButton={this.handleStartButton} />
           <Stop handleStopButton={this.handleStopButton}/>
           <Reset handleResetButton={this.handleResetButton}/>
