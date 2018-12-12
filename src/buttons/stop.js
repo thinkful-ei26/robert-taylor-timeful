@@ -2,6 +2,6 @@ import React from 'react';
 
 export default function Stop(props){
     return (
-        <button type='input' value= 'stop'>Stop</button>
+        <button onClick={props.handleStopButton} type='input' value= 'stop'>Stop</button>
     )
 }
