@@ -1,28 +1,40 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
+import Timer from './timer'; 
+import Start from './buttons/start'; 
+import Stop from './buttons/stop'; 
+import Reset from './buttons/reset'; 
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+export default class App extends React.Component {
+    constructor(props){
+      super(props); 
+      this.state ={
+        seconds:0, 
+        hours:0
+      }
+      this.secondsChange = this.secondsChange.bind(this); 
+      this.handleStartButton = this.handleStartButton.bind(this); 
+    }
+    secondsChange(){
+      this.setState({seconds: this.state.seconds +1})
+    }
+      handleStartButton(e){
+        console.log('start button pressed!')
+      e.preventDefault(); 
+      setInterval(this.secondsChange, 1000); 
+      }
 
-export default App;
+    render(){
+      return (
+        <div className ='parent'>
+          <h1>Timer</h1>
+          <Timer seconds= '20' minutes='10' hours= '5' />
+          <Start handleStartButton= {this.handleStartButton} />
+          <Stop />
+          <Reset />
+          
+          
+        </div>
+      )
+    }
+  }
